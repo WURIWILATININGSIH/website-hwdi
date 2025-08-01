@@ -9,7 +9,8 @@ class DashboardDPDController extends Controller
 {
     public function index()
     {
-        $kabupatens = Kabupaten::with('kecamatans')->get();
+        // $kabupatens = Kabupaten::with('kecamatans')->get();
+        $kabupatens = Kabupaten::get();
         $jenisDisabilitas = [
             'Tunanetra', 'Tunarungu', 'Tunawicara',
             'Tunagrahita', 'Tunadaksa', 'Tunalaras', 'Disabilitas Ganda'

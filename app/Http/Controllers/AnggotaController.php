@@ -16,6 +16,7 @@ class AnggotaController extends Controller
     public function indexDpc(Request $request)
     {
         $user = Auth::user();
+        $kabupatens = Kabupaten::get();
 
         $query = Anggota::query();
 
@@ -49,14 +50,14 @@ class AnggotaController extends Controller
         }
         
         $data = $query->where('kabupaten', $user->kabupaten)->paginate(15)->withQueryString();
-        $kabupatens = [$user->kabupaten];
-        $kabupatenId = $user->kabupaten_id;
+        // $kabupatens = [$user->kabupaten];
+        // $kabupatenId = $user->kabupaten_id;
 
-        $anggotas = Anggota::with('kecamatan', 'kecamatan.kabupaten')
-            ->whereHas('kecamatan.kabupaten', function ($query) use ($kabupatenId) {
-                $query->where('id', $kabupatenId);
-            })->get();
-        $kecamatans = Kecamatan::where('kabupaten_id', $kabupatenId)->get();
+        // $anggotas = Anggota::with('kecamatan', 'kecamatan.kabupaten')
+        //     ->whereHas('kecamatan.kabupaten', function ($query) use ($kabupatenId) {
+        //         $query->where('id', $kabupatenId);
+        //     })->get();
+        // $kecamatans = Kecamatan::where('kabupaten_id', $kabupatenId)->get();
 
         return view('data-anggota-dpc', compact('anggotas', 'kabupatens', 'kecamatans', 'data'));
     }
