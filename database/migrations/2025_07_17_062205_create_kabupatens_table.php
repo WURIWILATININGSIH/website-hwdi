@@ -11,9 +11,15 @@ return new class extends Migration
      */
   public function up()
 {
-    Schema::table('kabupatens', function (Blueprint $table) {
-        $table->string('nama')->after('id'); // atau sesuaikan posisi
+    Schema::create('kabupatens', function (Blueprint $table) {
+        $table->id();
+        $table->string('nama'); // atau sesuaikan posisi
     });
+}
+
+public function down()
+{
+    Schema::dropIfExists('kabupatens');
 }
 
 
